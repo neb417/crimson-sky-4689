@@ -13,6 +13,8 @@ RSpec.describe 'Chef show page' do
     @ingredient2 = Ingredient.create!(name: "Sauce", calories: 80)
     @ingredient3 = Ingredient.create!(name: "Cheese", calories: 120)
     @ingredient4 = Ingredient.create!(name: "Chicken", calories: 150)
+    @ingredient5 = Ingredient.create!(name: "Kale", calories: 150)
+    @ingredient6 = Ingredient.create!(name: "Tofu", calories: 150)
 
     @dish1.ingredients << @ingredient1 << @ingredient2 << @ingredient3
     @dish2.ingredients << @ingredient1 << @ingredient2 << @ingredient3 << @ingredient4
@@ -32,12 +34,25 @@ RSpec.describe 'Chef show page' do
       expect(page).to have_link("Ingredients #{@chef1.name} uses")
     end
 
-    it 'click link and taken to chef ingredient show page' do
+    it 'click link and taken to chef ingredient index page' do
       visit chef_path(@chef1.id)
 
-      click_link "Ingredients #{@chef1.name} Uses"
+      click_link "Ingredients #{@chef1.name} uses"
 
       expect(current_path).to eq(chef_ingredients_path(@chef1.id))
+    end
+
+    it 'click link and taken to chef ingredient index page with listed ingredients' do
+      visit chef_path(@chef1.id)
+
+      click_link "Ingredients #{@chef1.name} uses"
+
+      expect(page).to have_content(@ingredient1.name)
+      expect(page).to have_content(@ingredient2.name)
+      expect(page).to have_content(@ingredient3.name)
+      expect(page).to have_content(@ingredient4.name)
+      expect(page).to_not have_content(@ingredient5.name)
+      expect(page).to_not have_content(@ingredient6.name)
     end
   end
 end
