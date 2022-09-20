@@ -20,7 +20,7 @@ RSpec.describe 'Dish show page' do
   describe 'Visiting the Dish show page' do
     it 'the dish name and description is displayed' do
       visit dish_path(@dish1.id)
-      
+
       expect(page).to have_content(@dish1.name)
       expect(page).to have_content(@dish1.description)
       expect(page).to_not have_content(@dish2.description)
@@ -30,9 +30,9 @@ RSpec.describe 'Dish show page' do
       visit dish_path(@dish1.id)
 
       expect(page).to have_content(@ingredient1.name)
-      expect(page).to have_content(@ingredient2.description)
-      expect(page).to have_content(@ingredient3.description)
-      expect(page).to_not have_content(@ingredient4.description)
+      expect(page).to have_content(@ingredient2.name)
+      expect(page).to have_content(@ingredient3.name)
+      expect(page).to_not have_content(@ingredient4.name)
     end
   end
 end
