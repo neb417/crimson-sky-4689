@@ -6,6 +6,6 @@ class Dish < ApplicationRecord
 
   def self.dish_ingredients
     joins(:ingredients)
-    .select('ingredients.name')
+      .select('ingredients.name')
   end
 end

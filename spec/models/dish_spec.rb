@@ -34,6 +34,7 @@ RSpec.describe Dish, type: :model do
       names = @dish1.dish_ingredients.map do |ingredient|
                 Ingredient.find(ingredient.ingredient_id).name
               end
+
       expect(names).to eq([@ingredient1.name, @ingredient2.name,@ingredient3.name])
     end
   end
