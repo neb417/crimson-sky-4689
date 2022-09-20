@@ -8,4 +8,13 @@ class Dish < ApplicationRecord
     joins(:ingredients)
       .select('ingredients.name')
   end
+
+  def self.top_ingredients
+    # binding.pry
+    joins(:ingredients)
+      .select('dishes.*, count(ingredient.id) AS count')
+      .group(:id)
+      .order(count: :desc)
+      .limit(3)
+  end
 end
